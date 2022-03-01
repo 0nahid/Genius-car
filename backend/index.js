@@ -3,7 +3,22 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 require("dotenv").config();
-console.log(process.env); // remove this after you've confirmed it working
+
+// Database
+
+const { MongoClient, ServerApiVersion } = require("mongodb");
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@genius.r5hwg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverApi: ServerApiVersion.v1,
+});
+client.connect((err) => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  err ? console.log(err) : console.log("Connected to Database");
+  client.close();
+});
 
 app.get("/", (req, res) =>
   res.send({ status: `Server is running on port ${port}` })
