@@ -1,0 +1,26 @@
+.add-user form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+.add-user form input,
+textarea {
+  width: 30%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid rgb(172, 172, 172);
+  border-radius: 5px;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
