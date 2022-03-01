@@ -23,6 +23,10 @@ client.connect((err) => {
   app.post("/services", (req, res) => {
     collection.insertOne(req.body, (err, result) => res.json(result));
   });
+  //   Get server
+  app.get("/services", (req, res) => {
+    collection.find().toArray((err, result) => res.json(result));
+  });
   // perform actions on the collection object
   err ? console.log(err) : console.log("Connected to Database");
   //   client.close();
