@@ -38,6 +38,17 @@ client.connect((err) => {
       }
     });
   });
+  // delete api
+  app.delete("/services/:id", (req, res) => {
+    const id = req.params.id;
+    collection.deleteOne({ _id: new ObjectID(id) }, (err, result) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.send(result);
+      }
+    });
+  });
   // perform actions on the collection object
   err ? console.log(err) : console.log("Connected to Database");
   //   client.close();
