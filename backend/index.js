@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 // Database
-
+const { ObjectID } = require("bson");
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@genius.r5hwg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
@@ -26,6 +26,17 @@ client.connect((err) => {
   //   Get server
   app.get("/services", (req, res) => {
     collection.find().toArray((err, result) => res.json(result));
+  });
+  // get specific api
+  app.get("/services/:id", (req, res) => {
+    const id = req.params.id;
+    collection.findOne({ _id: new ObjectID(id) }, (err, result) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.send(result);
+      }
+    });
   });
   // perform actions on the collection object
   err ? console.log(err) : console.log("Connected to Database");
