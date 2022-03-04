@@ -4,12 +4,7 @@ import Swal from "sweetalert2";
 import "./AddService.css";
 
 export default function AddService() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     axios
@@ -24,6 +19,7 @@ export default function AddService() {
         }
       })
       .catch((err) => console.log(err));
+      reset();
   };
   return (
     <div className="add-user">
